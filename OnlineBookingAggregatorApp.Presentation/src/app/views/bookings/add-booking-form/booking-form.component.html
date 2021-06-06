@@ -1,0 +1,134 @@
+<ng-scrollbar visibility="hover" appearance="compact">
+    <mat-card>
+        <mat-card-title style="display: flex; justify-content: center;">
+            <ng-container *ngIf="this.editing; else add"><mat-icon>edit</mat-icon><h2>Edit</h2></ng-container>
+            <ng-template #add><mat-icon>add</mat-icon><h2>Add</h2></ng-template>
+            <ng-container><h2>&nbsp;Booking</h2></ng-container>
+        </mat-card-title>
+        <mat-card-content>
+            <mat-tab-group dynamicHeight>
+                <mat-tab label="General Information">
+                    <form [formGroup]="this.bookingForm" style="display: flex; flex-direction: column; margin-top: 20px;">
+                        <mat-form-field>
+                            <mat-label>Service</mat-label>
+                            <mat-select (selectionChange)="onServiceChange($event)" required placeholder="Service" formControlName="serviceId">
+                                <mat-option>
+                                    <ngx-mat-select-search placeholderLabel="Search" [formControl]="this.servicesSearchControl" noEntriesFoundLabel="No results"></ngx-mat-select-search>
+                                </mat-option>
+                                <mat-option *ngFor="let service of this.services$ | async" [value]="service.id">{{service.name}}</mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="this.bookingForm.get('serviceId').hasError('required')">Service must be specified</mat-error>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>Date From</mat-label>
+                            <input required formControlName="bookingDate" matInput readonly [min]="this.selectedDate" [matDatepicker]="$any(dateFromPicker)">
+                            <mat-datepicker-toggle matSuffix [for]="dateFromPicker"></mat-datepicker-toggle>
+                            <mat-datepicker #dateFromPicker></mat-datepicker>
+                            <mat-error *ngIf="this.bookingForm.get('bookingDate').hasError('required')">This field is required</mat-error>
+                        </mat-form-field>
+                        <div style="display: flex; justify-content: space-between;">
+                            <mat-form-field>
+                                <mat-label>Start Hour</mat-label>
+                                <mat-select placeholder="Start Hour" formControlName="hourFrom">
+                                    <mat-option *ngFor="let hour of this.hourList" [value]="hour.id">{{hour.name}}</mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="this.bookingForm.get('hourFrom').hasError('required')">This field is required</mat-error>
+                            </mat-form-field>
+                            <mat-form-field>
+                                <mat-label>Start Minutes</mat-label>
+                                <mat-select formControlName="minutesFrom" placeholder="Start Minutes">
+                                    <mat-option *ngFor="let minute of this.minutesList" [value]="minute.id">{{minute.name}}</mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="this.bookingForm.get('minutesFrom').hasError('required')">This field is required</mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <mat-form-field>
+                                <mat-label>End Hour</mat-label>
+                                <mat-select placeholder="End Hour" formControlName="hourTo">
+                                    <mat-option *ngFor="let hour of this.hourList" [value]="hour.id">{{hour.name}}</mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="this.bookingForm.get('hourTo').hasError('required')">This field is required</mat-error>
+                            </mat-form-field>
+                            <mat-form-field>
+                                <mat-label>End Minutes</mat-label>
+                                <mat-select formControlName="minutesTo" placeholder="End Minutes">
+                                    <mat-option *ngFor="let minute of this.minutesList" [value]="minute.id">{{minute.name}}</mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="this.bookingForm.get('minutesTo').hasError('required')">This field is required</mat-error>
+                            </mat-form-field>
+                        </div>
+                        <mat-form-field *policyAuthorize="Policy.CreateUnrelatedBookings">
+                            <mat-label>Assign To</mat-label>
+                            <mat-select required placeholder="Assign To" formControlName="specialistId">
+                                <mat-option>
+                                    <ngx-mat-select-search placeholderLabel="Search" noEntriesFoundLabel="No results" [formControl]="this.employeesSearchControl"></ngx-mat-select-search>
+                                </mat-option>
+                                <mat-option *ngFor="let specialist of this.employees$ | async" [value]="specialist.id">{{specialist.fullName}}</mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="this.bookingForm.get('specialistId').hasError('required')">This field is required</mat-error>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>Booking Colour</mat-label>
+                            <mat-select placeholder="Booking Colour" formControlName="colour">
+                                <mat-select-trigger *ngIf="this.bookingForm.controls['colour'].value" class="mark">
+                                    <mat-icon [ngStyle]="{'color': this.getColour(this.bookingForm.controls['colour'].value).primary}">brightness_1</mat-icon>
+                                    <span>{{this.getColour(this.bookingForm.controls['colour'].value).name}}</span>
+                                </mat-select-trigger>
+                                <mat-option [value]="null">Not Selected</mat-option>
+                                <mat-option *ngFor="let c of this.colours" [value]="c.id">
+                                    <mat-icon [ngStyle]="{'color': c.primary}">brightness_1</mat-icon>
+                                    <span>{{c.name}}</span>
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <textarea matInput matTextareaAutosize matAutosizeMinRows="7" matAutosizeMaxRows="10"
+                                  placeholder="Comments" formControlName="comments"></textarea>
+                        </mat-form-field>
+                    </form>
+                </mat-tab>
+                <mat-tab label="Client Information">
+                    <form [formGroup]="this.clientForm" style="display: flex; flex-direction: column; margin-top: 20px;">
+                        <mat-form-field>
+                            <mat-label>Client</mat-label>
+                            <mat-select placeholder="Client" formControlName="clientId">
+                                <mat-option>
+                                    <ngx-mat-select-search placeholderLabel="Search" [formControl]="this.clientsSearchControl" noEntriesFoundLabel="No results"
+                                    ></ngx-mat-select-search>
+                                </mat-option>
+                                <mat-option *ngFor="let client of this.clients$ | async" [value]="client.id">{{client.fullName}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>Client First Name</mat-label>
+                            <input matInput formControlName="clientFirstName" placeholder="Client First Name">
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>Client Last Name</mat-label>
+                            <input matInput formControlName="clientLastName" placeholder="Client Last Name">
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>Client Email</mat-label>
+                            <input matInput formControlName="clientEmail" placeholder="Client Email">
+                        </mat-form-field>
+                        <app-phone-input
+                                placeholderText="Client Phone"
+                                [ngModelOptions]="{standalone: true}"
+                                [(ngModel)]="this.clientPhoneNumber"
+                                errorText="Invalid Phone Number"
+                        ></app-phone-input>
+<!--                        <mat-form-field>-->
+<!--                            <mat-label>Client Phone</mat-label>-->
+<!--                            <input matInput formControlName="clientPhone" placeholder="Client Phone">-->
+<!--                        </mat-form-field>-->
+                    </form>
+                </mat-tab>
+            </mat-tab-group>
+        </mat-card-content>
+        <mat-card-actions>
+            <button color="primary" [disabled]="this.bookingForm.invalid || this.clientForm.invalid" (click)="this.submit()" mat-raised-button>Save</button>
+            <button color="accent" mat-raised-button (click)="this.cancel()">Cancel</button>
+        </mat-card-actions>
+    </mat-card>
+</ng-scrollbar>

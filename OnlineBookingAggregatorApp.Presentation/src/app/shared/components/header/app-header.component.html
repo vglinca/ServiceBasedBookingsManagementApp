@@ -1,0 +1,25 @@
+<mat-toolbar color="primary" style="min-height: 50px !important; height: 50px !important; display: flex;">
+    <div *ngIf="isMenuButtonShown">
+        <button mat-icon-button (click)="toggleSidebar()"><mat-icon>menu</mat-icon></button>
+    </div>
+    <div style="height: 100%; width: 100%; display: flex; flex-direction: row-reverse;">
+        <button mat-icon-button matTooltip="Settings" [matMenuTriggerFor]="menu"><mat-icon>settings</mat-icon></button>
+        <mat-menu #menu="matMenu" style="margin-right: 1rem;">
+            <div>
+                <button mat-menu-item (click)="this.navigateToAccount()"><mat-icon>account_circle</mat-icon>Account</button>
+                <button mat-menu-item (click)="this.openChangePassword()"><mat-icon>lock</mat-icon>Change Password</button>
+                <button mat-menu-item>
+                    <mat-slide-toggle color="primary" #toggleElement [checked]="this.toggleChecked" (change)="this.toggleNightMode($event)">
+                        Night mode
+                    </mat-slide-toggle>
+                </button>
+                <button mat-menu-item>
+                    <mat-icon [matBadge]="this.notificationsCount$ | async"
+                              [matBadgeHidden]="this.matBadgeHidden$ | async"
+                              matBadgeColor="accent"
+                    >notifications</mat-icon>Notifications</button>
+                <button mat-menu-item (click)="onSignOutClick()"><mat-icon>logout</mat-icon>Log out</button>
+            </div>
+        </mat-menu>
+    </div>
+</mat-toolbar>

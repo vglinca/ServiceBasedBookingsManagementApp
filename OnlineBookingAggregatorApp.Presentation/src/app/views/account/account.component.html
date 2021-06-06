@@ -1,0 +1,51 @@
+<ng-scrollbar appearance="standard" visibility="hover">
+    <div class="root-container">
+        <div>
+            <h2>Account Info</h2>
+            <mat-divider></mat-divider>
+        </div>
+        <div *ngIf="isLoading">
+            <app-mat-loading></app-mat-loading>
+        </div>
+        <div *ngIf="!isLoading">
+            <div class="form-wrapper">
+                <div class="label">
+                    <h3>User Personal Info</h3>
+                </div>
+                <div class="form">
+                    <form [formGroup]="userForm">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Email</mat-label>
+                            <input matInput formControlName="email" placeholder="Email"/>
+                        </mat-form-field>
+                        <app-phone-input formFieldAppearance="outline"
+                                         placeholderText="Phone Number"
+                                         [(ngModel)]="this.phoneNumber"
+                                         [ngModelOptions]="{standalone: true}"
+                                         [disabled]="!this.userEditMode"
+                        ></app-phone-input>
+                        <mat-form-field appearance="outline">
+                            <mat-label>First Name</mat-label>
+                            <input matInput formControlName="firstName" placeholder="First Name"/>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Last Name</mat-label>
+                            <input matInput formControlName="lastName" placeholder="Last Name"/>
+                        </mat-form-field>
+                        <mat-form-field color="primary" appearance="outline">
+                            <mat-label>Date of Birth</mat-label>
+                            <input matInput formControlName="birthDate" [matDatepicker]="datepicker" />
+                            <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
+                            <mat-datepicker #datepicker></mat-datepicker>
+                        </mat-form-field>
+                    </form>
+                    <button *ngIf="!this.userEditMode" class="edit-btn" color="primary" mat-raised-button (click)="onEditUserInfoClick()">Edit User Info</button>
+                    <div class="action-buttons" *ngIf="this.userEditMode">
+                        <button (click)="this.submit()" color="primary" mat-raised-button>Save</button>
+                        <button mat-raised-button color="accent" (click)="toggleUserEditMode()">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-scrollbar>

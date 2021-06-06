@@ -1,0 +1,21 @@
+<mat-card>
+    <mat-card-content>
+        <mat-list>
+            <mat-list-item *ngFor="let policy of this.policies$ | async; let i = index">
+                <div style="display: flex;">
+                    <mat-checkbox
+                            [checked]="this.checkboxChecked(policy.id)"
+                            [disabled]="this.checkboxDisabled(policy.id)"
+                            (change)="onCheckboxStateChange($event, policy.id)"
+                            color="primary" style="margin-right: 10px;"
+                    ></mat-checkbox>
+                    <h4>{{policy.name}}</h4>
+                </div>
+            </mat-list-item>
+        </mat-list>
+    </mat-card-content>
+    <mat-card-actions style="display: flex;">
+        <button *policyAuthorize="Policy.EditPermissions" mat-raised-button color="primary" (click)="onSaveClick()">Save</button>
+        <button mat-raised-button color="accent" (click)="onCancelClick()">Cancel</button>
+    </mat-card-actions>
+</mat-card>

@@ -1,0 +1,63 @@
+<div class="root-container" *ngIf="!isAccountCreated">
+    <div class="spinner" *ngIf="isSpinnerEnabled">
+        <mat-spinner></mat-spinner>
+    </div>
+    <div class="form">
+        <h1>
+            <mat-icon>how_to_reg</mat-icon>
+            Sign Up
+        </h1>
+        <div class="form-container" [formGroup]="registerFrom" (keyup)="onEnterClick($event)">
+            <mat-form-field appearance="outline">
+                <mat-label>First Name</mat-label>
+                <input required autocomplete="off" matInput formControlName="firstName"/>
+                <mat-error *ngIf="!isFormControlValid(this.registerFrom.controls.firstName) && this.registerFrom.controls.firstName.hasError('required')">
+                    First Name is required
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Last Name</mat-label>
+                <input required matInput autocomplete="off" formControlName="lastName"/>
+                <mat-error *ngIf="!isFormControlValid(this.registerFrom.controls.lastName) || this.registerFrom.controls.lastName.hasError('required')">
+                    Last Name is required
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Email</mat-label>
+                <input placeholder="example@email.com" required matInput autocomplete="off" formControlName="email"/>
+                <mat-error *ngIf="!isFormControlValid(this.registerFrom.controls.email) || this.registerFrom.controls.email.hasError('required')">
+                    Email is required
+                </mat-error>
+                <mat-error *ngIf="!isFormControlValid(this.registerFrom.controls.email) || this.registerFrom.controls.email.hasError('pattern')">
+                    Invalid email
+                </mat-error>
+                <mat-error *ngIf="!isFormControlValid(this.registerFrom.controls.email) || this.registerFrom.controls.email.hasError('isDuplicate')">
+                    User with such email already exists
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Gender</mat-label>
+                <mat-select formControlName="gender">
+                    <mat-option *ngFor="let gender of this.genders" [value]="gender.id">{{gender.name}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <app-phone-input
+                    #phoneInput
+                    formFieldAppearance="outline"
+                    errorText="Invalid Phone Number"
+                    placeholderText="Phone Number"
+                    [required]="true"
+                    [(ngModel)]="this.phoneNumber"
+                    [ngModelOptions]="{standalone: true}"
+            ></app-phone-input>
+<!--            <mat-form-field appearance="outline">-->
+<!--                <mat-label>Phone</mat-label>-->
+<!--                <input matInput required autocomplete="off" formControlName="phone" />-->
+<!--            </mat-form-field>-->
+            <div class="register-action">
+                <button color="primary" mat-raised-button [disabled]="this.formInvalid" (click)="onRegisterClick()">Register</button>
+            </div>
+        </div>
+    </div>
+    <p>Already have an account? <a routerLink="/login"><span>Sign In</span></a></p>
+</div>

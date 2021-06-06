@@ -1,0 +1,24 @@
+<ng-scrollbar>
+    <div class="table-content-container">
+        <div *ngIf="isLoading" class="progress-bar">
+            <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+        </div>
+        <div>
+            <h2>Bookings</h2>
+            <mat-divider></mat-divider>
+        </div>
+        <app-table-component
+                [data$]="this.bookings$"
+                [totalItems$]="this.totalItems$"
+                [columnDefs]="this.columnDefs"
+                [policyToAddResource]="Policy.CreateUnrelatedBookings"
+                [policyToDeleteResource]="Policy.DeleteUnrelatedBookings"
+                [policyToEditResource]="Policy.EditUnrelatedBookings"
+                [showDialogOnEditInsteadOfPage]="true"
+                (onAnyChange)="this.onChange($event)"
+                (openDialogToAddOrEdit)="this.openDialog($event)"
+                (onDelete)="this.deleteBooking($event)"
+                defaultSort="dateFrom"
+        ></app-table-component>
+    </div>
+</ng-scrollbar>

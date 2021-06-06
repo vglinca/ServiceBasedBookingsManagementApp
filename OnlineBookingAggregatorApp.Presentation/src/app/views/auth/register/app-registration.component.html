@@ -1,0 +1,11 @@
+<div style="width: 100%; height: 100%;">
+    <app-registration-form
+            *ngIf="!accountCreated"
+            [isSpinnerEnabled]="isSpinnerEnabled"
+            (signUpClicked)="onSignUpClick($event)">
+    </app-registration-form>
+    <app-complete-registration
+            *ngIf="accountCreated"
+            [emailRedirectionModel]="emailRedirectionModel">
+    </app-complete-registration>
+</div>

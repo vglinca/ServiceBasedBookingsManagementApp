@@ -1,0 +1,32 @@
+<mat-card>
+    <mat-card-title style="display: flex;">
+        <ng-container *ngIf="this.editing; else add"><h2>Edit</h2></ng-container>
+        <ng-template #add><h2>Add</h2></ng-template>
+        <ng-container><h2>&nbsp;Position</h2></ng-container>
+    </mat-card-title>
+    <mat-card-content>
+        <form [formGroup]="this.positionForm" style="display: flex; flex-direction: column;">
+            <mat-form-field appearance="outline">
+                <mat-label>Title</mat-label>
+                <input matInput placeholder="Title" required formControlName="name">
+                <mat-error *ngIf="this.positionForm.get('name').hasError('required')">Title is required.</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Description</mat-label>
+                <textarea matInput matTextareaAutosize
+                          required
+                          matAutosizeMinRows="7"
+                          matAutosizeMaxRows="10"
+                          placeholder="Description"
+                          formControlName="description"
+                ></textarea>
+                <mat-error *ngIf="this.positionForm.get('description').hasError('required')">Description is required.</mat-error>
+                <mat-error *ngIf="this.positionForm.get('description').hasError('maxLength')">Description should be less than 500 characters.</mat-error>
+            </mat-form-field>
+        </form>
+    </mat-card-content>
+    <mat-card-actions style="display: flex; justify-content: flex-end;">
+        <button color="primary" [disabled]="this.positionForm.invalid" mat-raised-button (click)="submit()">Save</button>
+        <button color="accent"  mat-raised-button (click)="closeDialog()">Cancel</button>
+    </mat-card-actions>
+</mat-card>

@@ -1,0 +1,9 @@
+<div>
+    <button mat-icon-button [color]="this.color" (click)="this.onClick()">
+        <mat-icon>search</mat-icon>
+    </button>
+    <mat-form-field floatPlaceholder="never">
+        <input matInput type="text" autocomplete="off" [placeholder]="this.placeholder" [(ngModel)]="this.value"
+               (input)="this.onChange($event.target.value)">
+    </mat-form-field>
+</div>

@@ -1,0 +1,23 @@
+<div class="table-content-container">
+    <div *ngIf="isLoading" class="progress-bar">
+        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </div>
+    <div>
+        <h2>Categories</h2>
+        <mat-divider style="margin-top: 5px; margin-bottom: 5px;"></mat-divider>
+    </div>
+    <app-table-component
+        [data$]="categories$"
+        [columnDefs]="columnDefs"
+        [totalItems$]="totalItems$"
+        [pageSize]="pageSize"
+        [showDialogOnEditInsteadOfPage]="true"
+        [policyToAddResource]="Policy.AddCategories"
+        [policyToEditResource]="Policy.EditCategories"
+        [policyToDeleteResource]="Policy.DeleteCategories"
+        (onAnyChange)="this.onChange($event)"
+        (openDialogToAddOrEdit)="addEditCategory($event)"
+        (onDelete)="deleteCategory($event)"
+        defaultSort="name"
+    ></app-table-component>
+</div>

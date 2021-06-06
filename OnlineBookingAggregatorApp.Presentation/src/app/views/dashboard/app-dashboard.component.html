@@ -1,0 +1,158 @@
+<ng-scrollbar visibility="hover" appearance="standard">
+    <div class="parent">
+        <mat-toolbar-row *policyAuthorize="Policy.ViewAllBookings" style="display: flex; justify-content: center;">
+            <mat-form-field style="margin-right: 5px;">
+                <mat-label>Select Position</mat-label>
+                <mat-select (selectionChange)="this.positionChanged($event)" placeholder="Select Position" [formControl]="this.positionCtrl">
+                    <mat-option *ngFor="let pos of this.positions" [value]="pos.id">{{pos.name}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field style="margin-left: 5px;">
+                <mat-label>Specialists</mat-label>
+                <mat-select (selectionChange)="this.employeesSelectionChange($event)" multiple placeholder="Specialists" [formControl]="this.employeesCtrl">
+                    <mat-option
+                            *ngFor="let employee of this.employeesByPosition" [value]="employee.id"
+                            [disabled]="this.selectedEmployees.length === 1 && this.selectedEmployees[0].id === employee.id"
+                    >{{employee.fullName}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </mat-toolbar-row>
+        <mat-toolbar-row class="calendar-actions">
+            <div *ngIf="this.showCalendarActionButtons">
+                <div class="cal-action-button" mwlCalendarPreviousView
+                     [view]="this.view"
+                     [(viewDate)]="this.viewDate"
+                     (viewDateChange)="this.changeReflectingDate($event, 0)">
+                    <button mat-flat-button color="primary">Previous</button>
+                </div>
+                <div class="cal-action-button" mwlCalendarToday
+                     (viewDateChange)="this.changeReflectingDate($event, 1)" [(viewDate)]="this.viewDate">
+                    <button mat-flat-button color="accent">Today</button>
+                </div>
+                <div class="cal-action-button" mwlCalendarNextView
+                     [view]="this.view"
+                     [(viewDate)]="this.viewDate"
+                     (viewDateChange)="this.changeReflectingDate($event, 2)">
+                    <button mat-flat-button color="primary">Next</button>
+                </div>
+            </div>
+            <div *ngIf="!this.showCalendarActionButtons">
+                <div class="cal-action-button" mwlCalendarPreviousView
+                     [view]="this.view"
+                     [(viewDate)]="this.viewDate"
+                     (viewDateChange)="this.changeReflectingDate($event, 0)">
+                    <button matTooltip="Previous" color="primary" mat-icon-button><mat-icon>chevron_left</mat-icon></button>
+                </div>
+                <div class="cal-action-button" mwlCalendarToday (viewDateChange)="this.changeReflectingDate($event, 1)" [(viewDate)]="this.viewDate">
+                    <button matTooltip="Today" color="accent" mat-icon-button><mat-icon>today</mat-icon></button>
+                </div>
+                <div class="cal-action-button" mwlCalendarNextView
+                     [view]="this.view"
+                     [(viewDate)]="this.viewDate"
+                     (viewDateChange)="this.changeReflectingDate($event, 2)">
+                    <button matTooltip="Next" color="primary" mat-icon-button><mat-icon>chevron_right</mat-icon></button>
+                </div>
+            </div>
+            <div>
+                <h3>{{this.viewDate | calendarDate:(this.view + 'ViewTitle'):'en'}}</h3>
+            </div>
+            <div class="cal-layout-switch-buttons" *ngIf="this.showCalendarActionButtons">
+                <button mat-flat-button [color]="this.view === CalendarView.Month ? 'accent' : 'primary'"
+                        (click)="this.setView(CalendarView.Month)"
+                >Month</button>
+                <button mat-flat-button [color]="this.view === CalendarView.Week ? 'accent' : 'primary'"
+                        (click)="this.setView(CalendarView.Week)"
+                >Week</button>
+                <button mat-flat-button [color]="this.view === CalendarView.Day ? 'accent' : 'primary'"
+                        (click)="this.setView(CalendarView.Day)"
+                >Day</button>
+            </div>
+            <div class="cal-layout-switch-buttons" *ngIf="!this.showCalendarActionButtons">
+                <button matTooltip="Month View" mat-icon-button [color]="this.view === CalendarView.Month ? 'accent' : 'primary'"
+                        (click)="this.setView(CalendarView.Month)"
+                ><mat-icon>calendar_view_month</mat-icon></button>
+                <button matTooltip="Week View" mat-icon-button [color]="this.view === CalendarView.Week ? 'accent' : 'primary'"
+                        (click)="this.setView(CalendarView.Week)"
+                ><mat-icon>calendar_view_week</mat-icon></button>
+                <button matTooltip="Day View" mat-icon-button [color]="this.view === CalendarView.Day ? 'accent' : 'primary'"
+                        (click)="this.setView(CalendarView.Day)"
+                ><mat-icon>calendar_view_day</mat-icon></button>
+            </div>
+        </mat-toolbar-row>
+
+        <app-mat-loading *ngIf="this.isLoading"></app-mat-loading>
+
+        <ng-template #loading>
+            <app-mat-loading></app-mat-loading>
+        </ng-template>
+
+        <ng-template #monthCellTemplate let-day="day" let-locale="locale">
+            <div class="cal-cell-top" (click)="day.badgeTotal < 1 && this.dayIsNotInThePast(day) ? this.dayClicked(day) : false">
+            <span class="cal-day-number"
+                  matTooltip="Click to add a booking"
+                  [matTooltipDisabled]="day.badgeTotal < 1 || !this.dayIsNotInThePast(day)"
+                  [ngClass]="{'cal-day-number-clickable': this.dayIsNotInThePast(day)}"
+                  (click)="day.badgeTotal > 0 && this.dayIsNotInThePast(day) ? this.dayClicked(day) : false"
+            >{{day.date | calendarDate: 'monthViewDayNumber': locale}}</span>
+                <span matTooltip="View Bookings" class="cal-day-badge" *ngIf="day.badgeTotal > 0" (click)="this.calDayBadgeClick(day)"
+                >{{ day.badgeTotal }}</span>
+                <ng-container *ngIf="day.events">
+                    <mat-chip-list class="chips-container">
+                        <mat-chip class="chip" (click)="this.eventBadgeClick(day, event)"
+                                  (removed)="this.onChipRemove(event)"
+                                  *ngFor="let event of day.events"
+                                  [ngStyle]="{'background-color': event.color.secondary}"
+                        ><mat-icon matChipRemove class="delete-icon">cancel</mat-icon>
+                        </mat-chip>
+                    </mat-chip-list>
+                </ng-container>
+            </div>
+        </ng-template>
+
+        <div *ngIf="this.events$ | async; else loading; let events">
+            <div [ngSwitch]="this.view">
+                <mwl-calendar-month-view
+                        *ngSwitchCase="CalendarView.Month"
+                        [events]="events"
+                        [viewDate]="viewDate"
+                        [refresh]="refresh$"
+                        [cellTemplate]="monthCellTemplate"
+                        (eventTimesChanged)="this.eventTimesChanged($event)"
+                        (eventClicked)="eventClicked($event)"
+                        (beforeViewRender)="this.beforeMonthViewRender($event)"
+                ></mwl-calendar-month-view>
+                <mwl-calendar-week-view
+                        *ngSwitchCase="CalendarView.Week"
+                        [events]="events"
+                        [viewDate]="viewDate"
+                        [refresh]="refresh$"
+                        [dayStartHour]="8"
+                        [dayStartMinute]="0"
+                        [dayEndHour]="20"
+                        [dayEndMinute]="0"
+                        (eventTimesChanged)="this.eventTimesChanged($event)"
+                        (eventClicked)="this.eventClicked($event)"
+                        (hourSegmentClicked)="this.onHourSegmentClick($event)"
+                        precision="minutes"
+                        [hourSegments]="4"
+                ></mwl-calendar-week-view>
+                <mwl-day-view-scheduler
+                        *ngSwitchCase="CalendarView.Day"
+                        [viewDate]="viewDate"
+                        [events]="events"
+                        [users]="this.selectedEmployees"
+                        [dayStartHour]="8"
+                        [dayStartMinute]="0"
+                        [dayEndHour]="20"
+                        [dayEndMinute]="0"
+                        precision="minutes"
+                        [hourSegments]="4"
+                        (hourSegmentClicked)="this.onDayViewHourSegmentClick($event)"
+                        (eventClicked)="eventClicked($event)"
+                        (eventTimesChanged)="eventTimesChanged($event)"
+                        (beforeViewRender)="this.beforeDayViewRender($event)"
+                ></mwl-day-view-scheduler>
+            </div>
+        </div>
+    </div>
+</ng-scrollbar>

@@ -1,0 +1,22 @@
+:host {
+  overflow-y: hidden;
+}
+
+.item-title {
+  margin-left: 2em;
+}
+
+.logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  & img {
+    transition: all .2s;
+    cursor: pointer;
+
+    &:hover {
+      transform: scale(1.04);
+    }
+  }
+}

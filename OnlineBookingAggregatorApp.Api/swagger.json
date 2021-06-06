@@ -1,0 +1,2520 @@
+{
+  "x-generator": "NSwag v13.10.1.0 (NJsonSchema v10.3.3.0 (Newtonsoft.Json v12.0.0.0))",
+  "swagger": "2.0",
+  "info": {
+    "title": "My Title",
+    "version": "1.0.0"
+  },
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/{companyId}/Bookings/{bookingId}": {
+      "get": {
+        "tags": [
+          "Bookings"
+        ],
+        "operationId": "Bookings_GetBookingById",
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "bookingId",
+            "in": "path",
+            "required": true,
+            "format": "int64",
+            "x-nullable": false
+          },
+          {
+            "type": "string",
+            "name": "companyId",
+            "in": "path",
+            "required": true,
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/BookingModel"
+            }
+          },
+          "404": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Bookings"
+        ],
+        "operationId": "Bookings_UpdateBooking",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json",
+          "application/xml",
+          "text/xml",
+          "application/*+xml"
+        ],
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "bookingId",
+            "in": "path",
+            "required": true,
+            "format": "int64",
+            "x-nullable": false
+          },
+          {
+            "name": "model",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BookingUpdateModel"
+            },
+            "x-nullable": false
+          },
+          {
+            "type": "string",
+            "name": "companyId",
+            "in": "path",
+            "required": true,
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": ""
+          },
+          "404": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          },
+          "422": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          }
+        }
+      }
+    },
+    "/api/{companyId}/Bookings": {
+      "post": {
+        "tags": [
+          "Bookings"
+        ],
+        "operationId": "Bookings_AddBooking",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json",
+          "application/xml",
+          "text/xml",
+          "application/*+xml"
+        ],
+        "parameters": [
+          {
+            "name": "model",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BookingCreateModel"
+            },
+            "x-nullable": false
+          },
+          {
+            "type": "string",
+            "name": "companyId",
+            "in": "path",
+            "required": true,
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "201": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          "422": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          }
+        }
+      }
+    },
+    "/api/{companyId}/Clients/client-paged": {
+      "get": {
+        "tags": [
+          "Clients"
+        ],
+        "operationId": "Clients_GetClientsPaged",
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "companyId",
+            "in": "path",
+            "required": true,
+            "format": "int64",
+            "x-nullable": false
+          },
+          {
+            "type": "integer",
+            "name": "PageSize",
+            "in": "query",
+            "format": "int32",
+            "x-nullable": false
+          },
+          {
+            "type": "integer",
+            "name": "PageNumber",
+            "in": "query",
+            "format": "int32",
+            "x-nullable": false
+          },
+          {
+            "type": "string",
+            "name": "Filter",
+            "in": "query",
+            "x-nullable": true
+          },
+          {
+            "type": "string",
+            "name": "FilterFields",
+            "in": "query",
+            "x-nullable": true
+          },
+          {
+            "type": "string",
+            "name": "OrderBy",
+            "in": "query",
+            "x-nullable": true
+          },
+          {
+            "type": "boolean",
+            "name": "Ascending",
+            "in": "query",
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/PagedResultModelOfClientModel"
+            }
+          },
+          "404": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          }
+        }
+      }
+    },
+    "/api/{companyId}/Clients/{clientId}": {
+      "get": {
+        "tags": [
+          "Clients"
+        ],
+        "operationId": "Clients_GetClientById",
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "clientId",
+            "in": "path",
+            "required": true,
+            "format": "int64",
+            "x-nullable": false
+          },
+          {
+            "type": "string",
+            "name": "companyId",
+            "in": "path",
+            "required": true,
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ClientModel"
+            }
+          },
+          "404": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          }
+        }
+      }
+    },
+    "/api/{companyId}/Clients": {
+      "put": {
+        "tags": [
+          "Clients"
+        ],
+        "operationId": "Clients_UpdateClientCategory",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json",
+          "application/xml",
+          "text/xml",
+          "application/*+xml"
+        ],
+        "parameters": [
+          {
+            "name": "model",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ClientCategoryUpdateModel"
+            },
+            "x-nullable": false
+          },
+          {
+            "type": "string",
+            "name": "companyId",
+            "in": "path",
+            "required": true,
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": ""
+          },
+          "404": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          }
+        }
+      }
+    },
+    "/api/Companies/{companyId}": {
+      "get": {
+        "tags": [
+          "Companies"
+        ],
+        "operationId": "Companies_GetCompanyById",
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "companyId",
+            "in": "path",
+            "required": true,
+            "format": "int64",
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/CompanyModel"
+            }
+          },
+          "404": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Companies"
+        ],
+        "operationId": "Companies_UpdateCompany",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json",
+          "application/xml",
+          "text/xml",
+          "application/*+xml"
+        ],
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "companyId",
+            "in": "path",
+            "required": true,
+            "format": "int64",
+            "x-nullable": false
+          },
+          {
+            "name": "model",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CompanyUpdateModel"
+            },
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": ""
+          },
+          "422": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          },
+          "404": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          }
+        }
+      }
+    },
+    "/api/Companies/{companyId}/business-areas": {
+      "get": {
+        "tags": [
+          "Companies"
+        ],
+        "operationId": "Companies_GetCompanyBusinessAreas",
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "companyId",
+            "in": "path",
+            "required": true,
+            "format": "int64",
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/BusinessAreaModel"
+              }
+            }
+          },
+          "404": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          }
+        }
+      }
+    },
+    "/api/Companies/create-company": {
+      "post": {
+        "tags": [
+          "Companies"
+        ],
+        "operationId": "Companies_CreateCompany",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json",
+          "application/xml",
+          "text/xml",
+          "application/*+xml"
+        ],
+        "parameters": [
+          {
+            "name": "model",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CompanyCreateModel"
+            },
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "201": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          "400": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          },
+          "422": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          }
+        }
+      }
+    },
+    "/api/Employees/{companyId}/employees-paged": {
+      "get": {
+        "tags": [
+          "Employees"
+        ],
+        "operationId": "Employees_GetEmployeesPaged",
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "companyId",
+            "in": "path",
+            "required": true,
+            "format": "int64",
+            "x-nullable": false
+          },
+          {
+            "type": "integer",
+            "name": "PageSize",
+            "in": "query",
+            "format": "int32",
+            "x-nullable": false
+          },
+          {
+            "type": "integer",
+            "name": "PageNumber",
+            "in": "query",
+            "format": "int32",
+            "x-nullable": false
+          },
+          {
+            "type": "string",
+            "name": "Filter",
+            "in": "query",
+            "x-nullable": true
+          },
+          {
+            "type": "string",
+            "name": "FilterFields",
+            "in": "query",
+            "x-nullable": true
+          },
+          {
+            "type": "string",
+            "name": "OrderBy",
+            "in": "query",
+            "x-nullable": true
+          },
+          {
+            "type": "boolean",
+            "name": "Ascending",
+            "in": "query",
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "401": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          },
+          "200": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/PagedResultModelOfEmployeeModel"
+            }
+          },
+          "404": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          },
+          "400": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          }
+        }
+      }
+    },
+    "/api/Employees/{employeeId}": {
+      "get": {
+        "tags": [
+          "Employees"
+        ],
+        "operationId": "Employees_GetEmployeeById",
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "employeeId",
+            "in": "path",
+            "required": true,
+            "format": "int64",
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "401": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          },
+          "200": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/EmployeeModel"
+            }
+          },
+          "404": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Employees"
+        ],
+        "operationId": "Employees_UpdateEmployee",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json",
+          "application/xml",
+          "text/xml",
+          "application/*+xml"
+        ],
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "employeeId",
+            "in": "path",
+            "required": true,
+            "format": "int64",
+            "x-nullable": false
+          },
+          {
+            "name": "model",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EmployeeCreateUpdateModel"
+            },
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "401": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          },
+          "400": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          },
+          "422": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          },
+          "404": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          },
+          "204": {
+            "description": ""
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Employees"
+        ],
+        "operationId": "Employees_DeleteEmployee",
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "employeeId",
+            "in": "path",
+            "required": true,
+            "format": "int64",
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "401": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          },
+          "404": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          },
+          "204": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/Employees/{companyId}/add-employee": {
+      "post": {
+        "tags": [
+          "Employees"
+        ],
+        "operationId": "Employees_AddEmployee",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json",
+          "application/xml",
+          "text/xml",
+          "application/*+xml"
+        ],
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "companyId",
+            "in": "path",
+            "required": true,
+            "format": "int64",
+            "x-nullable": false
+          },
+          {
+            "name": "model",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EmployeeCreateUpdateModel"
+            },
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "401": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          },
+          "201": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          "400": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          },
+          "422": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          }
+        }
+      }
+    },
+    "/api/Lookup/all-lookups": {
+      "get": {
+        "tags": [
+          "Lookup"
+        ],
+        "operationId": "Lookup_GetLookups",
+        "responses": {
+          "200": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/AllLookupsModel"
+            }
+          }
+        }
+      }
+    },
+    "/api/Lookup/roles": {
+      "get": {
+        "tags": [
+          "Lookup"
+        ],
+        "operationId": "Lookup_GetApplicationRoles",
+        "responses": {
+          "200": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Positions/{companyId}/paged": {
+      "get": {
+        "tags": [
+          "Positions"
+        ],
+        "operationId": "Positions_GetCompanyPositionsPaged",
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "companyId",
+            "in": "path",
+            "required": true,
+            "format": "int64",
+            "x-nullable": false
+          },
+          {
+            "type": "integer",
+            "name": "PageSize",
+            "in": "query",
+            "format": "int32",
+            "x-nullable": false
+          },
+          {
+            "type": "integer",
+            "name": "PageNumber",
+            "in": "query",
+            "format": "int32",
+            "x-nullable": false
+          },
+          {
+            "type": "string",
+            "name": "Filter",
+            "in": "query",
+            "x-nullable": true
+          },
+          {
+            "type": "string",
+            "name": "FilterFields",
+            "in": "query",
+            "x-nullable": true
+          },
+          {
+            "type": "string",
+            "name": "OrderBy",
+            "in": "query",
+            "x-nullable": true
+          },
+          {
+            "type": "boolean",
+            "name": "Ascending",
+            "in": "query",
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/PagedResultModelOfPositionModel"
+            }
+          }
+        }
+      }
+    },
+    "/api/Positions/{positionId}": {
+      "get": {
+        "tags": [
+          "Positions"
+        ],
+        "operationId": "Positions_GetCompanyPositionById",
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "positionId",
+            "in": "path",
+            "required": true,
+            "format": "int64",
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/PositionModel"
+            }
+          },
+          "404": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Positions"
+        ],
+        "operationId": "Positions_RemovePosition",
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "positionId",
+            "in": "path",
+            "required": true,
+            "format": "int64",
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "404": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          },
+          "204": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/Positions/{companyId}": {
+      "post": {
+        "tags": [
+          "Positions"
+        ],
+        "operationId": "Positions_AddPosition",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json",
+          "application/xml",
+          "text/xml",
+          "application/*+xml"
+        ],
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "companyId",
+            "in": "path",
+            "required": true,
+            "format": "int64",
+            "x-nullable": false
+          },
+          {
+            "name": "model",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PositionCreateUpdateModel"
+            },
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "201": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          "404": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          },
+          "422": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          }
+        }
+      }
+    },
+    "/api/companies/{companyId}/Services/services-paged": {
+      "get": {
+        "tags": [
+          "Services"
+        ],
+        "operationId": "Services_ServicePagedGetByCompanyId",
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "companyId",
+            "in": "path",
+            "required": true,
+            "format": "int64",
+            "x-nullable": false
+          },
+          {
+            "type": "integer",
+            "name": "PageSize",
+            "in": "query",
+            "format": "int32",
+            "x-nullable": false
+          },
+          {
+            "type": "integer",
+            "name": "PageNumber",
+            "in": "query",
+            "format": "int32",
+            "x-nullable": false
+          },
+          {
+            "type": "string",
+            "name": "Filter",
+            "in": "query",
+            "x-nullable": true
+          },
+          {
+            "type": "string",
+            "name": "FilterFields",
+            "in": "query",
+            "x-nullable": true
+          },
+          {
+            "type": "string",
+            "name": "OrderBy",
+            "in": "query",
+            "x-nullable": true
+          },
+          {
+            "type": "boolean",
+            "name": "Ascending",
+            "in": "query",
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/PagedResultModelOfServiceModel"
+            }
+          },
+          "404": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          }
+        }
+      }
+    },
+    "/api/companies/{companyId}/Services/{serviceId}": {
+      "get": {
+        "tags": [
+          "Services"
+        ],
+        "operationId": "Services_GetServiceById",
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "serviceId",
+            "in": "path",
+            "required": true,
+            "format": "int64",
+            "x-nullable": false
+          },
+          {
+            "type": "string",
+            "name": "companyId",
+            "in": "path",
+            "required": true,
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ServiceModel"
+            }
+          },
+          "404": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Services"
+        ],
+        "operationId": "Services_UpdateService",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json",
+          "application/xml",
+          "text/xml",
+          "application/*+xml"
+        ],
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "serviceId",
+            "in": "path",
+            "required": true,
+            "format": "int64",
+            "x-nullable": false
+          },
+          {
+            "name": "model",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServiceCreateUpdateModel"
+            },
+            "x-nullable": false
+          },
+          {
+            "type": "string",
+            "name": "companyId",
+            "in": "path",
+            "required": true,
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": ""
+          },
+          "404": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Services"
+        ],
+        "operationId": "Services_DeleteService",
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "serviceId",
+            "in": "path",
+            "required": true,
+            "format": "int64",
+            "x-nullable": false
+          },
+          {
+            "type": "string",
+            "name": "companyId",
+            "in": "path",
+            "required": true,
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": ""
+          },
+          "404": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          }
+        }
+      }
+    },
+    "/api/companies/{companyId}/Services": {
+      "post": {
+        "tags": [
+          "Services"
+        ],
+        "operationId": "Services_CreateService",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json",
+          "application/xml",
+          "text/xml",
+          "application/*+xml"
+        ],
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "companyId",
+            "in": "path",
+            "required": true,
+            "format": "int64",
+            "x-nullable": false
+          },
+          {
+            "name": "updateModel",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServiceCreateUpdateModel"
+            },
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "201": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          "400": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          },
+          "422": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          }
+        }
+      }
+    },
+    "/api/Users/check-unique-email": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "operationId": "Users_CheckUserEmailUnique",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "email",
+            "in": "query",
+            "x-nullable": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        }
+      }
+    },
+    "/api/Users/check-user-has-created-company/{userId}": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "operationId": "Users_CheckUserHasCreatedCompany",
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "format": "int64",
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        }
+      }
+    },
+    "/api/WorkSchedules/{employeeId}": {
+      "get": {
+        "tags": [
+          "WorkSchedules"
+        ],
+        "operationId": "WorkSchedules_GetEmployeeWorkSchedules",
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "employeeId",
+            "in": "path",
+            "required": true,
+            "format": "int64",
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/WorkScheduleModel"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "BookingModel": {
+      "type": "object",
+      "required": [
+        "clientId",
+        "serviceId",
+        "dateFrom",
+        "dateTo",
+        "specialistId",
+        "clientCategory"
+      ],
+      "properties": {
+        "clientId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "additionalPhone": {
+          "type": "string"
+        },
+        "serviceId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "dateFrom": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "dateTo": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "comments": {
+          "type": "string"
+        },
+        "specialistId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "gender": {
+          "$ref": "#/definitions/Gender"
+        },
+        "clientCategory": {
+          "$ref": "#/definitions/ClientCategory"
+        },
+        "clientBirthDate": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "Gender": {
+      "type": "integer",
+      "description": "",
+      "x-enumNames": [
+        "Male",
+        "Female"
+      ],
+      "enum": [
+        1,
+        2
+      ]
+    },
+    "ClientCategory": {
+      "type": "integer",
+      "description": "",
+      "x-enumNames": [
+        "Loyal",
+        "Permanent",
+        "VIP"
+      ],
+      "enum": [
+        1,
+        2,
+        3
+      ]
+    },
+    "ProblemDetails": {
+      "type": "object",
+      "additionalProperties": {},
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "status": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "detail": {
+          "type": "string"
+        },
+        "instance": {
+          "type": "string"
+        },
+        "extensions": {
+          "type": "object",
+          "additionalProperties": {}
+        }
+      }
+    },
+    "BookingCreateModel": {
+      "type": "object",
+      "required": [
+        "serviceId",
+        "dateFrom",
+        "dateTo",
+        "specialistId"
+      ],
+      "properties": {
+        "clientId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "clientFirstName": {
+          "type": "string"
+        },
+        "clientLastName": {
+          "type": "string"
+        },
+        "clientEmail": {
+          "type": "string"
+        },
+        "clientPhone": {
+          "type": "string"
+        },
+        "clientAdditionalPhone": {
+          "type": "string"
+        },
+        "serviceId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "dateFrom": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "dateTo": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "comments": {
+          "type": "string"
+        },
+        "specialistId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "gender": {
+          "$ref": "#/definitions/Gender"
+        },
+        "clientBirthDate": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "BookingUpdateModel": {
+      "type": "object",
+      "required": [
+        "clientId",
+        "serviceId",
+        "dateFrom",
+        "dateTo",
+        "specialistId"
+      ],
+      "properties": {
+        "clientId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "serviceId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "dateFrom": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "dateTo": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "comments": {
+          "type": "string"
+        },
+        "specialistId": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "PagedResultModelOfClientModel": {
+      "type": "object",
+      "required": [
+        "pageNumber",
+        "pageSize",
+        "totalCount",
+        "totalPages"
+      ],
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ClientModel"
+          }
+        },
+        "pageNumber": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "pageSize": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "totalCount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "totalPages": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "ClientModel": {
+      "type": "object",
+      "required": [
+        "dateOfBirth"
+      ],
+      "properties": {
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "phoneNumber": {
+          "type": "string"
+        },
+        "additionalPhoneNumber": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "clientCategory": {
+          "type": "string"
+        },
+        "gender": {
+          "type": "string"
+        },
+        "dateOfBirth": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "comments": {
+          "type": "string"
+        }
+      }
+    },
+    "ClientCategoryUpdateModel": {
+      "type": "object",
+      "required": [
+        "clientId",
+        "clientCategory"
+      ],
+      "properties": {
+        "clientId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "clientCategory": {
+          "$ref": "#/definitions/ClientCategory"
+        }
+      }
+    },
+    "CompanyModel": {
+      "type": "object",
+      "required": [
+        "id",
+        "companyTypeId",
+        "businessTypeId",
+        "employeesSize"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "companyTypeId": {
+          "$ref": "#/definitions/CompanyType"
+        },
+        "companyType": {
+          "type": "string"
+        },
+        "businessTypeId": {
+          "$ref": "#/definitions/BusinessType"
+        },
+        "employeesSize": {
+          "$ref": "#/definitions/EmployeesSize"
+        },
+        "businessType": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "address": {
+          "$ref": "#/definitions/AddressModel"
+        },
+        "logoPath": {
+          "type": "string"
+        }
+      }
+    },
+    "CompanyType": {
+      "type": "integer",
+      "description": "",
+      "x-enumNames": [
+        "JuridicalPerson",
+        "PhysicalPerson"
+      ],
+      "enum": [
+        0,
+        1
+      ]
+    },
+    "BusinessType": {
+      "type": "integer",
+      "description": "",
+      "x-enumNames": [
+        "Beauty",
+        "Healthcare",
+        "Sport",
+        "Education",
+        "Entertainment",
+        "HouseholdServices",
+        "Auto",
+        "Retail",
+        "Other"
+      ],
+      "enum": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ]
+    },
+    "EmployeesSize": {
+      "type": "integer",
+      "description": "",
+      "x-enumNames": [
+        "One",
+        "FromTwoToFive",
+        "FromSixToTen",
+        "FromElevenToTwenty",
+        "TwentyOnePlus"
+      ],
+      "enum": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
+    },
+    "AddressModel": {
+      "type": "object",
+      "properties": {
+        "country": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "street": {
+          "type": "string"
+        }
+      }
+    },
+    "BusinessAreaModel": {
+      "type": "object",
+      "required": [
+        "businessAreaId"
+      ],
+      "properties": {
+        "businessAreaId": {
+          "$ref": "#/definitions/BusinessArea"
+        },
+        "businessArea": {
+          "type": "string"
+        }
+      }
+    },
+    "BusinessArea": {
+      "type": "integer",
+      "description": "",
+      "x-enumNames": [
+        "BeautSalon",
+        "Barbershop",
+        "PrivateEmployee",
+        "KidsHairdresser",
+        "Spa",
+        "Tattoo",
+        "Cosmetology",
+        "EyebrowsAndEyelashes",
+        "NailService",
+        "Waxing",
+        "OtherBeautyServices",
+        "OtherBeautyBusiness",
+        "MedicalCenter",
+        "Dentist",
+        "VetClinic",
+        "Analysis",
+        "PsychotherapyAndPsychology",
+        "AlternativeMedicine",
+        "Hospital",
+        "Polyclinic",
+        "DiagnosticCenter",
+        "WomenConsultation",
+        "WellnessMassage",
+        "OtherMedicalBusiness",
+        "FitnessClub",
+        "SportSchool",
+        "DanceSchool",
+        "TennisAndSquash",
+        "SwimmingPool",
+        "TrampolineCenter",
+        "Ems",
+        "PersonalCoach",
+        "Yoga",
+        "PrivateServices",
+        "OtherSport",
+        "MultidisciplinaryCourses",
+        "KidsWorkshop",
+        "LanguageSchool",
+        "SchoolOfMusic",
+        "TestPreparation",
+        "DrivingSchool",
+        "OtherEducation",
+        "Sauna",
+        "Bowling",
+        "CyberSport",
+        "Quest",
+        "Restaurant",
+        "MassageSalon",
+        "Karting",
+        "OtherEntertainment",
+        "PhotoStudio",
+        "Atelier",
+        "DryCleaning",
+        "Cleaning",
+        "EquipmentRepair",
+        "ZooServices",
+        "EquipmentRental",
+        "OtherHouseholdServices",
+        "CarWash",
+        "AutoBodyShop",
+        "CarShowroom",
+        "TuningCenter",
+        "VehicleInspection",
+        "DetailingCenter",
+        "PrivateMechanic",
+        "TyreShop",
+        "CarRental",
+        "AnotherAutoBusiness",
+        "OpticsSalon",
+        "CosmeticsStore",
+        "FurnitureAndInterior",
+        "FoodStore",
+        "BookStore",
+        "ShoppingCenter",
+        "BoutiqueAndShowroom",
+        "WeddingSalon",
+        "OtherRetail",
+        "Notary",
+        "AccountingAndAuditing",
+        "EventManagement",
+        "LawFirm",
+        "RealEstate",
+        "SelfEmployedSpecialist"
+      ],
+      "enum": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        69,
+        70,
+        71,
+        72,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        80,
+        81,
+        82,
+        83
+      ]
+    },
+    "CompanyCreateModel": {
+      "type": "object",
+      "required": [
+        "companyType",
+        "businessType",
+        "businessArea",
+        "employeesSize"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "companyType": {
+          "$ref": "#/definitions/CompanyType"
+        },
+        "businessType": {
+          "$ref": "#/definitions/BusinessType"
+        },
+        "businessArea": {
+          "$ref": "#/definitions/BusinessArea"
+        },
+        "employeesSize": {
+          "$ref": "#/definitions/EmployeesSize"
+        },
+        "email": {
+          "type": "string"
+        },
+        "address": {
+          "$ref": "#/definitions/AddressDto"
+        }
+      }
+    },
+    "AddressDto": {
+      "type": "object",
+      "properties": {
+        "country": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "street": {
+          "type": "string"
+        }
+      }
+    },
+    "CompanyUpdateModel": {
+      "type": "object",
+      "required": [
+        "companyType",
+        "employeesSize"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "companyType": {
+          "$ref": "#/definitions/CompanyType"
+        },
+        "employeesSize": {
+          "$ref": "#/definitions/EmployeesSize"
+        },
+        "businessAreas": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BusinessArea"
+          }
+        },
+        "email": {
+          "type": "string"
+        },
+        "address": {
+          "$ref": "#/definitions/AddressModel"
+        }
+      }
+    },
+    "PagedResultModelOfEmployeeModel": {
+      "type": "object",
+      "required": [
+        "pageNumber",
+        "pageSize",
+        "totalCount",
+        "totalPages"
+      ],
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EmployeeModel"
+          }
+        },
+        "pageNumber": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "pageSize": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "totalCount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "totalPages": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "EmployeeModel": {
+      "type": "object",
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "phoneNumber": {
+          "type": "string"
+        },
+        "companyId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "gender": {
+          "$ref": "#/definitions/Gender"
+        },
+        "position": {
+          "type": "string"
+        },
+        "information": {
+          "type": "string"
+        },
+        "specialization": {
+          "type": "string"
+        }
+      }
+    },
+    "EmployeeCreateUpdateModel": {
+      "type": "object",
+      "properties": {
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "gender": {
+          "$ref": "#/definitions/Gender"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "positionId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "specialization": {
+          "type": "string"
+        },
+        "information": {
+          "type": "string"
+        },
+        "workSchedules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WorkScheduleModel"
+          }
+        }
+      }
+    },
+    "WorkScheduleModel": {
+      "type": "object",
+      "required": [
+        "workScheduleId",
+        "startingWorkAt",
+        "dayType",
+        "workingHoursFrom",
+        "workingMinutesFrom",
+        "workingHoursTo",
+        "workingMinutesTo"
+      ],
+      "properties": {
+        "workScheduleId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "startingWorkAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "dayType": {
+          "$ref": "#/definitions/DayType"
+        },
+        "weekendType": {
+          "$ref": "#/definitions/WeekendType"
+        },
+        "workingHoursFrom": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "workingMinutesFrom": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "workingHoursTo": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "workingMinutesTo": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "DayType": {
+      "type": "integer",
+      "description": "",
+      "x-enumNames": [
+        "WorkDay",
+        "Weekend"
+      ],
+      "enum": [
+        1,
+        2
+      ]
+    },
+    "WeekendType": {
+      "type": "integer",
+      "description": "",
+      "x-enumNames": [
+        "Sick",
+        "Leave",
+        "PaidHoliday",
+        "NonPaidHoliday",
+        "PlainWeekend",
+        "Absence"
+      ],
+      "enum": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    "AllLookupsModel": {
+      "type": "object",
+      "properties": {
+        "companyTypes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CompanyTypeModel"
+          }
+        },
+        "businessAreas": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BusinessAreaLookupModel"
+          }
+        },
+        "businessTypes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BusinessTypeModel"
+          }
+        },
+        "genders": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GenderModel"
+          }
+        },
+        "employeesQuantities": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EmployeesQuantityModel"
+          }
+        },
+        "dayTypes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DayTypeModel"
+          }
+        },
+        "weekendTypes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WeekendTypeModel"
+          }
+        }
+      }
+    },
+    "CompanyTypeModel": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseLookupModel"
+        },
+        {
+          "type": "object"
+        }
+      ]
+    },
+    "BaseLookupModel": {
+      "type": "object",
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "BusinessAreaLookupModel": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseLookupModel"
+        },
+        {
+          "type": "object",
+          "required": [
+            "businessType"
+          ],
+          "properties": {
+            "businessType": {
+              "$ref": "#/definitions/BusinessType"
+            }
+          }
+        }
+      ]
+    },
+    "BusinessTypeModel": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseLookupModel"
+        },
+        {
+          "type": "object"
+        }
+      ]
+    },
+    "GenderModel": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseLookupModel"
+        },
+        {
+          "type": "object"
+        }
+      ]
+    },
+    "EmployeesQuantityModel": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseLookupModel"
+        },
+        {
+          "type": "object"
+        }
+      ]
+    },
+    "DayTypeModel": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseLookupModel"
+        },
+        {
+          "type": "object"
+        }
+      ]
+    },
+    "WeekendTypeModel": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseLookupModel"
+        },
+        {
+          "type": "object"
+        }
+      ]
+    },
+    "PagedResultModelOfPositionModel": {
+      "type": "object",
+      "required": [
+        "pageNumber",
+        "pageSize",
+        "totalCount",
+        "totalPages"
+      ],
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PositionModel"
+          }
+        },
+        "pageNumber": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "pageSize": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "totalCount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "totalPages": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "PositionModel": {
+      "type": "object",
+      "required": [
+        "companyId"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "companyId": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "PositionCreateUpdateModel": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "PagedResultModelOfServiceModel": {
+      "type": "object",
+      "required": [
+        "pageNumber",
+        "pageSize",
+        "totalCount",
+        "totalPages"
+      ],
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServiceModel"
+          }
+        },
+        "pageNumber": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "pageSize": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "totalCount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "totalPages": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "ServiceModel": {
+      "type": "object",
+      "required": [
+        "id",
+        "companyId",
+        "price",
+        "rating"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "companyId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "subType": {
+          "type": "string"
+        },
+        "price": {
+          "type": "number",
+          "format": "decimal"
+        },
+        "rating": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "ServiceCreateUpdateModel": {
+      "type": "object",
+      "required": [
+        "businessArea",
+        "price"
+      ],
+      "properties": {
+        "businessArea": {
+          "$ref": "#/definitions/BusinessArea"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "subType": {
+          "type": "string"
+        },
+        "price": {
+          "type": "number",
+          "format": "decimal"
+        },
+        "employeeIds": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      }
+    }
+  }
+}

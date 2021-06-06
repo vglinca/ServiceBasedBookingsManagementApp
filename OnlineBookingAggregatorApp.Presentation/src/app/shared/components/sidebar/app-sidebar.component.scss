@@ -1,0 +1,45 @@
+:host {
+  overflow-y: hidden;
+}
+
+.logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  & img {
+    transition: all .2s;
+    cursor: pointer;
+
+    &:hover {
+      transform: scale(1.04);
+    }
+  }
+}
+
+.item-title {
+  margin-left: 2em;
+}
+
+mat-nav-list {
+  //background-color: #4c596e;
+  padding: 9px;
+
+  & a {
+    transition: all .2s ease-in-out;
+    &:hover {
+      transform: scale(1.04);
+    }
+  }
+}
+
+.is-active {
+  background-color: #00bcd4 !important;
+  color: #fff !important;
+  border-radius: 5px;
+  font-weight: 500;
+
+  & mat-icon {
+    color: #fff;
+  }
+}

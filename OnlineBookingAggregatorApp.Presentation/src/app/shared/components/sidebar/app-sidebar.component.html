@@ -1,0 +1,22 @@
+<ng-scrollbar visibility="hover" appearance="standard">
+    <mat-nav-list>
+        <h3 class="logo">
+            <a routerLink="/dashboard">
+                <img class="logo-img" alt="Logo" height="100" src="assets/app_logo_1.png"/>
+            </a>
+        </h3>
+        <mat-divider></mat-divider>
+        <div>
+            <a mat-list-item routerLink="/account" [routerLinkActive]="['is-active']" ><mat-icon>account_circle</mat-icon><span class="item-title">Account</span></a>
+            <a *policyAuthorize="policy.ViewPermissions" mat-list-item routerLink="/permissions" [routerLinkActive]="['is-active']" ><mat-icon>vpn_key</mat-icon><span class="item-title">Permissions</span></a>
+            <a *policyAuthorize="policy.ViewCompanyDetails" mat-list-item routerLink="/company-details" [routerLinkActive]="['is-active']" ><mat-icon>info</mat-icon><span class="item-title">Company Info</span></a>
+            <a mat-list-item routerLink="/dashboard" [routerLinkActive]="['is-active']"><mat-icon>dashboard</mat-icon><span class="item-title">Dashboard</span></a>
+            <a *policyAuthorize="policy.ViewAllBookings" mat-list-item routerLink="/bookings" [routerLinkActive]="['is-active']"><mat-icon>event</mat-icon><span class="item-title">Bookings</span></a>
+            <a *policyAuthorize="policy.ViewClients" mat-list-item routerLink="/clients" [routerLinkActive]="['is-active']"><mat-icon>group</mat-icon><span class="item-title">Clients</span></a>
+            <a *policyAuthorize="policy.ViewEmployees" mat-list-item routerLink="/employees" [routerLinkActive]="['is-active']"><mat-icon>contacts</mat-icon><span class="item-title">Employees</span></a>
+            <a *policyAuthorize="policy.ViewPositions" mat-list-item routerLink="/positions" [routerLinkActive]="['is-active']"><mat-icon>insights</mat-icon><span class="item-title">Positions</span></a>
+            <a *policyAuthorize="policy.ViewCategories" mat-list-item routerLink="/categories" [routerLinkActive]="['is-active']"><mat-icon>category</mat-icon><span class="item-title">Categories</span></a>
+            <a *policyAuthorize="policy.ViewServices" mat-list-item routerLink="/services" [routerLinkActive]="['is-active']"><mat-icon>miscellaneous_services</mat-icon><span class="item-title">Services</span></a>
+        </div>
+    </mat-nav-list>
+</ng-scrollbar>

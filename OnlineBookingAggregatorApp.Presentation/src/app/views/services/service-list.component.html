@@ -1,0 +1,24 @@
+<ng-scrollbar>
+    <div class="table-content-container">
+        <div *ngIf="isLoading" class="progress-bar">
+            <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+        </div>
+        <div>
+            <h2>Services</h2>
+            <mat-divider></mat-divider>
+        </div>
+        <app-table-component
+                [totalItems$]="this.totalItems$"
+                [columnDefs]="this.columnDefs"
+                [showDialogOnEditInsteadOfPage]="true"
+                [data$]="this.services$"
+                [policyToAddResource]="Policy.AddServices"
+                [policyToEditResource]="Policy.EditServices"
+                [policyToDeleteResource]="Policy.DeleteServices"
+                (onAnyChange)="this.onChange($event)"
+                (openDialogToAddOrEdit)="this.openDialog($event)"
+                (onDelete)="this.deleteService($event)"
+                defaultSort="name"
+        ></app-table-component>
+    </div>
+</ng-scrollbar>

@@ -1,0 +1,178 @@
+@mixin displayFlexColumn {
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin heightWidth160{
+  height: 160px;
+  width: 160px;
+}
+
+.root-container {
+  padding: 20px 20px 40px 30px;
+  margin-bottom: 30px;
+}
+
+.logo-info {
+  display: flex;
+  align-content: center;
+
+  & .left-container {
+    @include displayFlexColumn();
+  }
+
+  & .right-container {
+    display: flex;
+    justify-content: space-evenly;
+    padding: 0;
+    width: 75%;
+
+    & .company-logo {
+      @include heightWidth160();
+
+      & img {
+        @include heightWidth160();
+      }
+    }
+
+    & .upload-photo {
+      padding: 0;
+    }
+  }
+}
+
+.form-wrapper {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding-top: 2%;
+  padding-bottom: 40px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  width: 75%;
+
+  & form {
+    width: 100%;
+    @include displayFlexColumn();
+
+    & mat-form-field {
+      width: 60%;
+    }
+  }
+
+  & mat-form-field {
+    width: 60%;
+  }
+
+  & .edit-btn {
+    width: 60%;
+  }
+
+  & .action-buttons {
+    display: flex;
+    width: 60%;
+
+    & button {
+      width: 50%;
+    }
+  }
+}
+
+mat-divider {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.progress-bar {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+}
+
+@media (max-width: 1000px) {
+
+  .logo-info {
+    @include displayFlexColumn();
+    align-items: center;
+
+    & .left-container {
+      & h3 {
+        text-align: center;
+      }
+    }
+
+    & .right-container {
+      @include displayFlexColumn();
+      align-items: center;
+    }
+  }
+
+  .form-wrapper {
+    @include displayFlexColumn();
+    align-items: center;
+    padding-top: 2%;
+  }
+
+  .form {
+    & form {
+      & mat-form-field {
+        width: 80%;
+      }
+    }
+
+    & mat-form-field {
+      width: 80%;
+    }
+
+    & .edit-btn {
+      width: 80%;
+    }
+
+    & .action-buttons {
+      display: flex;
+      width: 80%;
+
+      & button {
+        width: 50%;
+      }
+    }
+  }
+}
+
+@media (max-width: 500px) {
+  .form-wrapper {
+    @include displayFlexColumn();
+    align-items: center;
+    padding-top: 2%;
+  }
+
+  .form {
+    & form {
+      & mat-form-field {
+        width: 100%;
+      }
+    }
+
+    & mat-form-field {
+      width: 100%;
+    }
+
+    & .edit-btn {
+      width: 100%;
+    }
+
+    & .action-buttons {
+      display: flex;
+      width: 100%;
+
+      & button {
+        width: 50%;
+      }
+    }
+  }
+}

@@ -1,0 +1,19 @@
+<ng-scrollbar visibility="hover" appearance="standard">
+    <div class="table-content-container">
+        <div *ngIf="isLoading" class="progress-bar">
+            <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+        </div>
+        <div>
+            <h2>Manage Permissions</h2>
+            <mat-divider style="margin-top: 5px; margin-bottom: 15px;"></mat-divider>
+        </div>
+        <mat-accordion>
+            <mat-expansion-panel #expPanel *ngFor="let role of this.rolePolicies$ | async">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>{{role.roleName}}</mat-panel-title>
+                </mat-expansion-panel-header>
+                <app-role-policies [rolePolicies]="role" (closeExpansionPanel)="expPanel.close()"></app-role-policies>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </div>
+</ng-scrollbar>

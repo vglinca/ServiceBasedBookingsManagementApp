@@ -1,0 +1,148 @@
+.parent {
+  display: flex;
+  flex-direction: column;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-bottom: 35px;
+  margin-bottom: 50px !important;
+}
+
+.calendar-actions {
+  display: flex;
+  justify-content: space-between;
+  & * {
+    display: flex;
+  }
+
+  div {
+    &.cal-action-button{
+      margin: 2px;
+    }
+  }
+}
+
+.cal-layout-switch-buttons {
+  button {
+    margin: 2px;
+  }
+}
+
+::ng-deep .cal-hour-segment {
+  &:hover {
+    cursor: pointer !important;
+  }
+}
+
+.cal-month-view {
+
+  min-width: 1125px;
+
+  .cal-header .cal-cell {
+    padding: 25px 0;
+    opacity: 0.5;
+    font-weight: normal;
+  }
+
+  .cal-day-cell.cal-weekend .cal-day-number {
+    color: #ff5722;
+    opacity: 0.9;
+  }
+
+  .cal-day-cell.cal-out-month .cal-day-number {
+    opacity: 0.3;
+  }
+
+  .cal-day-cell.cal-today {
+    .cal-day-number {
+      color: #e91e63;
+    }
+  }
+
+  .cal-event {
+    &:hover {
+      transform: scale(1.5);
+    }
+  }
+
+  .cal-day-badge {
+    background-color: #1565c0;
+    &:hover {
+      cursor: pointer;
+      transform: scale(1.5);
+    }
+  }
+
+  .cal-day-container {
+    display: flex;
+    justify-content: center;
+
+    .edit-btn {
+      background-color: #f06292;
+      margin: 3px;
+    }
+  }
+
+  .cal-day-bottom {
+    display: flex;
+    margin-bottom: 4px;
+    margin-right: 6px;
+  }
+}
+
+.chips-container {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 10px 5px 5px;
+
+  .chip {
+    width: 64px;
+    display: flex;
+    justify-content: flex-end;
+
+    &.delete-icon {
+      color: white;
+      opacity: 1;
+      transition: opacity ease 0.4s;
+      width: 24px;
+      height: 24px;
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+
+.day-of-month {
+  &:hover {
+    cursor: pointer !important;
+  }
+}
+
+.day-of-month-no-hover-pointer {
+  &:hover {
+    cursor: default !important;
+  }
+}
+
+.cal-day-number-clickable {
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.booking-event span {
+  color: aliceblue !important;
+}
+
+.even-day {
+  background-color: #fafafa;
+}
+
+.odd-day {
+  background-color: #fff3e0;
+}
+
+.cal-week-view .cal-hour:not(:last-child) .cal-hour-segment, .cal-week-view .cal-hour:last-child :not(:last-child) .cal-hour-segment {
+  border-bottom-color: #4db6ac;
+}

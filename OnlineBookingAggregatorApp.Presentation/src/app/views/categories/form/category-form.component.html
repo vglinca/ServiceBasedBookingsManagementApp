@@ -1,0 +1,36 @@
+<mat-card>
+    <mat-card-title style="display: flex;">
+        <ng-container *ngIf="this.editing; else add"><mat-icon>edit</mat-icon><h2>Edit</h2></ng-container>
+        <ng-template #add><mat-icon>add</mat-icon><h2>Add</h2></ng-template>
+        <ng-container><h2>&nbsp;Category</h2></ng-container>
+    </mat-card-title>
+    <mat-card-content>
+        <form [formGroup]="this.categoryForm" style="display: flex; flex-direction: column;">
+            <mat-form-field appearance="outline">
+                <mat-label>Name</mat-label>
+                <input matInput placeholder="Name" formControlName="name">
+                <mat-error *ngIf="this.categoryForm.get('name').hasError('required')">This field is required.</mat-error>
+                <mat-error *ngIf="this.categoryForm.get('name').hasError('maxLength')">Category name should not be greater than 100 characters</mat-error>
+                <mat-error *ngIf="this.categoryForm.get('name').hasError('unique')">Category with this name already exists.</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Business Area</mat-label>
+                <mat-select placeholder="Business Area" formControlName="businessArea">
+                    <mat-option *ngFor="let area of this.businessAreas" [value]="area.id">{{area.name}}</mat-option>
+                </mat-select>
+                <mat-error *ngIf="this.categoryForm.get('name').hasError('required')">This field is required.</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Destination group</mat-label>
+                <mat-select placeholder="Destination group" formControlName="serviceTargetGroup">
+                    <mat-option *ngFor="let group of this.targetServiceGroups" [value]="group.id">{{group.name}}</mat-option>
+                </mat-select>
+                <mat-error *ngIf="this.categoryForm.get('name').hasError('required')">This field is required.</mat-error>
+            </mat-form-field>
+        </form>
+    </mat-card-content>
+    <mat-card-actions style="display: flex; justify-content: flex-end;">
+        <button color="primary" mat-raised-button [disabled]="this.categoryForm.invalid" (click)="onSubmit()">Save</button>
+        <button color="accent" mat-raised-button (click)="onCancelClick()">Cancel</button>
+    </mat-card-actions>
+</mat-card>

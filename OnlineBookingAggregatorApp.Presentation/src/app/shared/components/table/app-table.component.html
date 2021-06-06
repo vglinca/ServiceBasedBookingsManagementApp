@@ -1,0 +1,79 @@
+<div class="table-container">
+    <div class="table-header">
+        <mat-form-field class="filter-fields">
+            <mat-label>Columns used in search</mat-label>
+            <mat-select [formControl]="searchFieldsControl" placeholder="Columns used in search" multiple>
+                <mat-option *ngFor="let field of this.searchFields" [value]="field.id">{{field.name}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <app-search-button></app-search-button>
+        <ng-container *policyAuthorize="this.policyToAddResource">
+            <a *ngIf="this.addEnabled && !this.showDialogOnEditInsteadOfPage; else openAddDialog" routerLink="./new" mat-icon-button>
+                <mat-icon>add</mat-icon>
+            </a>
+            <ng-template #openAddDialog>
+                <a mat-icon-button (click)="this.onAddEditClick(0)">
+                    <mat-icon>add</mat-icon>
+                </a>
+            </ng-template>
+        </ng-container>
+    </div>
+    <mat-table matSort [matSortActive]="this.defaultSort" [dataSource]="this.data$ | async" class="responsive">
+        <ng-container *ngFor="let column of this.columnDefs" matColumnDef="{{column.id}}">
+            <ng-container *ngIf="column.sortable; else notSortableHeaderCell">
+                <mat-header-cell
+                        [ngClass]="{'number-column': column.showsNumber, 'large-text': column.showsLargeText, 'standard-text': column.showsStandardText}"
+                        *matHeaderCellDef mat-sort-header
+                >{{column.name}}</mat-header-cell>
+            </ng-container>
+            <ng-template #notSortableHeaderCell>
+                <mat-header-cell
+                        [ngClass]="{'number-column': column.showsNumber, 'large-text': column.showsLargeText, 'standard-text': column.showsStandardText}"
+                        *matHeaderCellDef
+                >{{column.name}}</mat-header-cell>
+            </ng-template>
+            <mat-cell
+                    [ngClass]="{'number-column': column.showsNumber, 'large-text': column.showsLargeText, 'standard-text': column.showsStandardText}"
+                    *matCellDef="let row">
+                <span class="mobile-label">{{column.name}}:&nbsp;</span>
+                <span *ngIf="column.icon; else cellElseBlock">
+                    <mat-icon *ngIf="row[column.id]">{{column.icon}}</mat-icon>
+                </span>
+                <ng-template #cellElseBlock>
+                    <span [matTooltip]="row[column.id]" [matTooltipDisabled]="row[column.id]?.length < 100 || column.showsNumber"
+                    >{{column.format ? column.format(row[column.id]) : row[column.id] | maxLength: 100}}</span>
+                </ng-template>
+            </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef class="col-actions actions">Actions</mat-header-cell>
+            <mat-cell *matCellDef="let row" class="col-actions actions">
+                <div class="action-icons">
+                    <button *ngIf="this.showDetails" matTooltip="Details" style="color: #b39ddb;" mat-icon-button>
+                        <mat-icon>visibility</mat-icon>
+                    </button>
+                    <ng-container *policyAuthorize="this.policyToEditResource">
+                        <a class="edit-btn" *ngIf="!this.showDialogOnEditInsteadOfPage; else openDialog" [routerLink]="['./edit', row.id]" matTooltip="Edit" mat-icon-button>
+                            <mat-icon>edit</mat-icon>
+                        </a>
+                        <ng-template #openDialog>
+                            <button class="edit-btn" matTooltip="Edit" mat-icon-button (click)="onAddEditClick(row.id)">
+                                <mat-icon>edit</mat-icon>
+                            </button>
+                        </ng-template>
+                    </ng-container>
+                    <button class="delete-btn" *policyAuthorize="this.policyToDeleteResource" matTooltip="Delete" mat-icon-button (click)="onDeleteItemClick(row.id)">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </div>
+            </mat-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="columnIds"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: columnIds"></mat-row>
+    </mat-table>
+    <mat-paginator #paginator showFirstLastButtons [length]="this.totalItems$ | async"
+                   [pageIndex]="this.pageIndex"
+                   [pageSize]="this.pageSize"
+                   [pageSizeOptions]="this.pageSizeOptions"
+    ></mat-paginator>
+</div>

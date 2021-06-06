@@ -1,0 +1,90 @@
+<ng-scrollbar visibility="hover" appearance="standard">
+    <mat-card>
+        <mat-card-title style="display: flex; justify-content: center;">
+            <ng-container *ngIf="this.editing; else add"><mat-icon>edit</mat-icon><h2>Edit</h2></ng-container>
+            <ng-template #add><mat-icon>add</mat-icon><h2>Add</h2></ng-template>
+            <ng-container><h2>&nbsp;Client</h2></ng-container>
+        </mat-card-title>
+        <mat-card-content>
+            <form [formGroup]="this.clientForm" style="display: flex; flex-direction: column;">
+                <mat-form-field appearance="outline">
+                    <mat-label>First Name</mat-label>
+                    <input autocomplete="off" matInput placeholder="First Name" required formControlName="firstName">
+                    <mat-error *ngIf="this.clientForm.get('firstName').hasError('required')">First Name is required</mat-error>
+                    <mat-error *ngIf="this.clientForm.get('firstName').hasError('maxLength')">Length should not be greater than 40 characters</mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Last Name</mat-label>
+                    <input autocomplete="off" matInput placeholder="last Name" required formControlName="lastName">
+                    <mat-error *ngIf="this.clientForm.get('lastName').hasError('required')">Last Name is required</mat-error>
+                    <mat-error *ngIf="this.clientForm.get('lastName').hasError('maxLength')">Length should not be greater than 40 characters</mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Email</mat-label>
+                    <input autocomplete="off" matInput placeholder="Email" required formControlName="email">
+                    <mat-error *ngIf="this.clientForm.get('email').hasError('required')">Email is required</mat-error>
+                    <mat-error *ngIf="this.clientForm.get('email').hasError('maxLength')">Length should not be greater than 50 characters</mat-error>
+                    <mat-error *ngIf="this.clientForm.get('email').hasError('pattern')">Provided email is invalid</mat-error>
+                </mat-form-field>
+                <app-phone-input
+                        #phoneInput
+                        placeholderText="Client Phone"
+                        [required]="true"
+                        [ngModelOptions]="{standalone: true}"
+                        [(ngModel)]="this.phoneNumber"
+                        formFieldAppearance="outline"
+                        errorText="Invalid Phone Number"
+                ></app-phone-input>
+                <app-phone-input
+                        #additionalPhoneInput
+                        placeholderText="Client Additional Phone"
+                        [ngModelOptions]="{standalone: true}"
+                        [(ngModel)]="this.additionalPhoneNumber"
+                        formFieldAppearance="outline"
+                        errorText="Invalid Phone Number"
+                ></app-phone-input>
+<!--                <mat-form-field appearance="outline">-->
+<!--                    <mat-label>Phone number</mat-label>-->
+<!--                    <input matInput placeholder="Phone number" required formControlName="phoneNumber">-->
+<!--                    <mat-error *ngIf="this.clientForm.get('phoneNumber').hasError('maxLength')">Length should not be greater than 40 characters</mat-error>-->
+<!--                    <mat-error *ngIf="this.clientForm.get('phoneNumber').hasError('required')">Phone Number is required</mat-error>-->
+<!--                </mat-form-field>-->
+<!--                <mat-form-field appearance="outline">-->
+<!--                    <mat-label>Additional Phone number</mat-label>-->
+<!--                    <input matInput placeholder="Additional Phone number" formControlName="additionalPhoneNumber">-->
+<!--                    <mat-error *ngIf="this.clientForm.get('additionalPhoneNumber').hasError('maxLength')">Length should not be greater than 40 characters</mat-error>-->
+<!--                </mat-form-field>-->
+                <mat-form-field appearance="outline">
+                    <mat-label>Category</mat-label>
+                    <mat-select placeholder="Category" required formControlName="clientCategory">
+                        <mat-option *ngFor="let category of this.clientCategories$ | async" [value]="category.id">{{category.name}}</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="this.clientForm.get('clientCategory').hasError('required')">Category is required</mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Gender</mat-label>
+                    <mat-select placeholder="Gender" formControlName="gender">
+                        <mat-option *ngFor="let gender of this.genders$ | async" [value]="gender.id">{{gender.name}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Date Of Birth</mat-label>
+                    <input matInput readonly formControlName="dateOfBirth" [matDatepicker]="matDatepicker">
+                    <mat-datepicker-toggle matSuffix [for]="matDatepicker"></mat-datepicker-toggle>
+                    <mat-datepicker #matDatepicker></mat-datepicker>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Comments</mat-label>
+                    <textarea matInput matTextareaAutosize matAutosizeMinRows="7" matAutosizeMaxRows="10"
+                              placeholder="Comments" formControlName="comments"
+                    ></textarea>
+                    <mat-error *ngIf="this.clientForm.get('comments').hasError('maxLength')">Length should not be greater than 500 characters</mat-error>
+                </mat-form-field>
+            </form>
+        </mat-card-content>
+        <mat-card-actions>
+            <button color="primary" [disabled]="this.formInvalid" mat-raised-button (click)="onSubmit()">Save</button>
+            <button color="accent" mat-raised-button (click)="onCancelClick()">Cancel</button>
+        </mat-card-actions>
+    </mat-card>
+</ng-scrollbar>

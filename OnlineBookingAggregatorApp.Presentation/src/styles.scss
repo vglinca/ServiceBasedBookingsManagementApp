@@ -1,0 +1,214 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/theming';
+@import '~angular-calendar/scss/angular-calendar.scss';
+
+@include mat-core();
+
+$light-primary: mat-palette($mat-blue, 800);
+$light-accent: mat-palette($mat-red);
+$light-warn: mat-palette($mat-gray, 700);
+
+$dark-primary: mat-palette($mat-blue, 600);
+$dark-accent: mat-palette($mat-red, 400);
+
+$inside-theme-dark: mat-dark-theme($dark-primary, $dark-accent, $light-warn);
+$inside-theme-light: mat-light-theme($light-primary, $light-accent, $light-warn);
+
+$bg-dark-primary: #1f262d;
+$bg-dark-secondary: #394046;
+$bg-active: #2c343a;
+$text-color: #d5d6d7;
+$border-color: rgba(0, 0, 0, 0.6);
+
+.color-scheme-dark {
+  @include angular-material-theme($inside-theme-dark);
+
+  .mat-button-toggle {
+    background-color: mat-color($dark-primary);
+    color: mat-color($dark-primary, default-contrast);
+  }
+
+  .mat-button-toggle-checked {
+    background-color: mat-color($dark-accent);
+    color: mat-color($dark-accent, default-contrast);
+  }
+
+  .mat-error {
+    color: mat-color($dark-accent);
+  }
+
+  mat-toolbar {
+    background-color: #1f262d !important;
+  }
+
+  mat-drawer-content {
+    background-color: #303030 !important;
+  }
+
+  .login-root-container {
+    background-color: #303030 !important;
+    color: white;
+  }
+
+  .logo-img {
+    filter: invert(1) !important;
+  }
+
+  //*:not(.sidebar-icon):not(mat-icon) {
+  //  color: #fff !important;
+  //}
+
+  .is-active {
+    background-color: #00acc1 !important;
+  }
+
+  .mat-table.responsive {
+    .mat-row {
+      &:nth-child(even){
+        background: #1f262d;
+      }
+      &:hover{
+        background: #2c343a;
+      }
+    }
+  }
+
+  @include cal-theme(
+                  (
+                          bg-primary: $bg-dark-primary,
+                          bg-secondary: $bg-dark-secondary,
+                          weekend-color: indianred,
+                          bg-active: $bg-active,
+                          border-color: $border-color,
+                          gray: $bg-dark-secondary,
+                          today-bg: $bg-dark-secondary,
+                          event-color-primary: $bg-dark-secondary,
+                  )
+  );
+
+  .cal-month-view .cal-day-cell.cal-out-month .cal-day-number {
+    opacity: 0.15;
+  }
+
+  .snack-bar-default {
+    white-space: pre-wrap;
+    background: #1f262d;
+    color: white;
+  }
+
+  .snack-bar-success {
+    white-space: pre-wrap;
+    background: #1f262d;
+    color: lightgreen;
+  }
+
+  .snack-bar-warning {
+    white-space: pre-wrap;
+    background: #1f262d;
+    color: darkorange;
+  }
+
+  .snack-bar-error {
+    white-space: pre-wrap;
+    background: #1f262d;
+    color: hotpink !important;
+  }
+
+  .work-hour-segment {
+    background-color: #004d40;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+
+.color-scheme-light {
+  @include angular-material-theme($inside-theme-light);
+
+  .mat-button-toggle {
+    background-color: mat-color($light-primary);
+    color: mat-color($light-primary, default-contrast);
+  }
+
+  .mat-button-toggle-checked {
+    background-color: mat-color($light-accent);
+    color: mat-color($light-accent, default-contrast);
+  }
+
+  .mat-error {
+    color: mat-color($light-accent);
+  }
+
+  .mat-table.responsive {
+    .mat-row {
+      &:nth-child(even){
+        background: #fafafa;
+      }
+      &:hover{
+        background: #f3f3f3;
+      }
+    }
+  }
+
+  .snack-bar-default {
+    white-space: pre-wrap;
+    color: white;
+  }
+
+  .snack-bar-success {
+    white-space: pre-wrap;
+    color: lightgreen;
+  }
+
+  .snack-bar-warning {
+    white-space: pre-wrap;
+    color: darkorange;
+  }
+
+  .snack-bar-error {
+    white-space: pre-wrap;
+    color: hotpink;
+  }
+
+  mat-drawer {
+    background-color: #f2f3f1 !important;
+  }
+
+  .work-hour-segment {
+    background-color: #dcedc8;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+
+.mat-table.responsive {
+  width: 100%;
+  .mat-row {
+    .action-icons {
+      justify-content: flex-end;
+      width: 100%;
+    }
+
+    .col-actions {
+      justify-content: flex-end;
+    }
+
+    .long-text-row {
+      max-width: 35%;
+      min-width: 250px;
+    }
+  }
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.progress-bar {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+}

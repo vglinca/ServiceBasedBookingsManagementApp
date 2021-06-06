@@ -1,0 +1,35 @@
+<ng-scrollbar visibility="hover" appearance="standard">
+    <mat-card>
+        <mat-card-title>
+            <h2>Bookings for {{this.data.day}}</h2>
+        </mat-card-title>
+        <mat-card-content>
+            <mat-accordion>
+                <mat-expansion-panel [expanded]="isFirst" *ngFor="let booking of this.bookings; first as isFirst">
+                    <mat-expansion-panel-header>
+                        <div style="display: flex; width: 100%; justify-content: space-between; padding-right: 10px;">
+                            <div style="display: flex;">
+                                <span>{{this.getTime(booking.dateFrom)}}&nbsp;-&nbsp;{{this.getTime(booking.dateTo)}}</span>
+                                <span style="margin-left: 5px;"
+                                      [matTooltip]="booking.state.name"
+                                      [ngStyle]="{'color': booking.colour.primary}"
+                                ><mat-icon>{{booking.state.icon}}</mat-icon></span>
+                            </div>
+                            <span><mat-icon [ngStyle]="{'color': booking.colour.secondary}">brightness_1</mat-icon></span>
+                        </div>
+                    </mat-expansion-panel-header>
+                    <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                        <span>Client:&nbsp;{{booking.firstName}}&nbsp;{{booking.lastName}}</span>
+                        <span *ngIf="booking.email">Email:&nbsp;{{booking.email}}</span>
+                        <span *ngIf="booking.phone">Phone number:&nbsp;{{booking.phone}}</span>
+                        <span>Specialist:&nbsp;{{booking.specialist}}</span>
+                        <span style="color: green;">Status:&nbsp;<span style="text-transform: uppercase;">{{booking.state.name}}</span></span>
+                    </div>
+                </mat-expansion-panel>
+            </mat-accordion>
+        </mat-card-content>
+        <mat-card-actions style="display: flex; justify-content: flex-end;">
+            <button mat-raised-button color="accent" (click)="this.close()">Close</button>
+        </mat-card-actions>
+    </mat-card>
+</ng-scrollbar>

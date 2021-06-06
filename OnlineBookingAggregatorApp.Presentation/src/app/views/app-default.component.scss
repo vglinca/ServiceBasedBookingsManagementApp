@@ -1,0 +1,28 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  color: #66615b;
+}
+
+mat-sidenav-container {
+  height: 100%;
+  position: relative;
+}
+
+mat-drawer {
+  color: #66615b;
+  width: 275px;
+}
+
+mat-drawer-container {
+  height: 100%;
+  color: #f9f9f9;
+}
+
+mat-drawer-content {
+  color: #66615b;
+  background-color: #eeeeee;
+  overflow-y: hidden;
+  overflow-x: auto;
+}

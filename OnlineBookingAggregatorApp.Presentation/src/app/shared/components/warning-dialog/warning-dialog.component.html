@@ -1,0 +1,10 @@
+<h1 mat-dialog-title>
+    <mat-icon color="warn">info</mat-icon>
+    <span [innerHtml]="this.title"></span>
+</h1>
+<mat-dialog-content>
+    <p class="warning-message" [innerHtml]="this.message"></p>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-raised-button color="primary" (click)="confirm()">Ok</button>
+</mat-dialog-actions>

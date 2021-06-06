@@ -1,0 +1,31 @@
+<ng-scrollbar visibility="hover" appearance="standard">
+    <div style="padding: 20px 20px 40px 30px; margin-bottom: 30px;">
+        <div *ngIf="isLoading" class="progress-bar">
+            <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+        </div>
+        <div>
+            <div style="display: flex; justify-content: space-between;">
+                <div style="display: flex;">
+                    <ng-container *ngIf="this.isUpdate(); else add"><h2>Edit</h2></ng-container>
+                    <ng-template #add><h2>Add</h2></ng-template>
+                    <ng-container><h2>&nbsp;Employee</h2></ng-container>
+                </div>
+                <div>
+                    <button style="width: 100px;" mat-raised-button color="primary" (click)="onCancelClick()">Cancel</button>
+                    <button style="width: 100px;" mat-raised-button color="accent" [disabled]="this.formInvalid" (click)="onSaveClick()">Save</button>
+                </div>
+            </div>
+            <mat-divider></mat-divider>
+        </div>
+        <div style="display: flex; flex-direction: column;">
+            <mat-tab-group dynamicHeight>
+                <mat-tab label="Information">
+                    <employee-information [employee$]="this.employeeModel"></employee-information>
+                </mat-tab>
+                <mat-tab label="Schedule">
+                    <employee-schedule [workSchedules]="this.workSchedules"></employee-schedule>
+                </mat-tab>
+            </mat-tab-group>
+        </div>
+    </div>
+</ng-scrollbar>

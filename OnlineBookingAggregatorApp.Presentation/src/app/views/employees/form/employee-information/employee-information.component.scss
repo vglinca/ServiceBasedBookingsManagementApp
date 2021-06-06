@@ -1,0 +1,41 @@
+@mixin flexColumn {
+  display: flex;
+  flex-direction: column;
+}
+
+:host ::ng-deep .mat-card {
+  //background-color: #f2f4f5;
+}
+
+mat-card-content {
+  display: flex;
+  justify-content: center;
+}
+
+form {
+  @include flexColumn();
+
+  & mat-form-field {
+    width: 500px;
+  }
+}
+
+@media (max-width: 880px) {
+  form {
+    @include flexColumn();
+
+    & mat-form-field {
+      width: 400px;
+    }
+  }
+}
+
+@media (max-width: 750px) {
+  form {
+    @include flexColumn();
+
+    & mat-form-field {
+      width: 360px;
+    }
+  }
+}

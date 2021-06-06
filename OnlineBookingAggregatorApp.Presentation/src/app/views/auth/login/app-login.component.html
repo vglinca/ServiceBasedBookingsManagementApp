@@ -1,0 +1,28 @@
+<div *ngIf="isLoading" class="progress-bar">
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</div>
+<div class="login-root-container">
+    <div class="form">
+        <h1>
+            <mat-icon>account_circle</mat-icon>
+            Sign In
+        </h1>
+        <div class="form-container" [formGroup]="loginForm" (keyup)="onEnterClick($event)">
+            <mat-form-field appearance="outline">
+                <mat-label>Email</mat-label>
+                <input required matInput autocomplete="off" formControlName="email"/>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Password</mat-label>
+                <input required matInput autocomplete="off" type="password" formControlName="password"/>
+            </mat-form-field>
+        </div>
+        <div class="account-options">
+            <mat-checkbox color="primary">Remember me</mat-checkbox>
+            <li>Forgot password?</li>
+        </div>
+        <button class="sign-in-btn" mat-raised-button color="primary"
+                [disabled]="!loginForm.valid" (click)="onSignInClick()">Sign In</button>
+        <p>Don't have an account? <a routerLink="/register"><span>Create</span></a></p>
+    </div>
+</div>

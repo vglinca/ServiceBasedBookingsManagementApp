@@ -1,0 +1,89 @@
+<ng-scrollbar visibility="hover" appearance="standard">
+    <div class="root-container">
+        <div>
+            <h2>Company Info</h2>
+            <mat-divider></mat-divider>
+        </div>
+        <div *ngIf="isLoading" class="progress-bar">
+            <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+        </div>
+<!--        <div *ngIf="this.isLoading">-->
+<!--            <app-mat-loading></app-mat-loading>-->
+<!--        </div>-->
+        <div *ngIf="!isLoading">
+            <div class="logo-info">
+                <div class="left-container">
+                    <h3>Company logo</h3>
+                    <p>Here is the logo of the company</p>
+                </div>
+                <div class="right-container">
+                    <div class="company-logo">
+                        <img src="assets/app_logo_1.png" alt="logo">
+                    </div>
+                    <div>
+                        <h4 class="upload-photo">Upload a new logo</h4>
+                    </div>
+                </div>
+            </div>
+            <mat-divider></mat-divider>
+            <div class="form-wrapper">
+                <div class="label">
+                    <h3>Company Info</h3>
+                </div>
+                <div class="form">
+                    <form [formGroup]="companyForm">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Company Name</mat-label>
+                            <input matInput formControlName="name" placeholder="Company Name" />
+                        </mat-form-field>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Email</mat-label>
+                            <input matInput formControlName="email" placeholder="Email" />
+                        </mat-form-field>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Company Type</mat-label>
+                            <input matInput formControlName="companyType" placeholder="Company Type" />
+                        </mat-form-field>
+<!--                        <mat-form-field appearance="outline">-->
+<!--                            <mat-label>Country</mat-label>-->
+<!--                            <input matInput formControlName="country" placeholder="Country" />-->
+<!--                        </mat-form-field>-->
+                        <mat-form-field appearance="outline">
+                            <mat-label>City</mat-label>
+                            <input matInput formControlName="city" placeholder="City" />
+                        </mat-form-field>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Street</mat-label>
+                            <input matInput formControlName="street" placeholder="Street" />
+                        </mat-form-field>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Business Type</mat-label>
+                            <input matInput formControlName="businessType" placeholder="Business Type" />
+                        </mat-form-field>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Number of employees</mat-label>
+                            <mat-select formControlName="employeesSize" placeholder="Number of employees">
+                                <mat-option *ngFor="let size of this.employeeQuantities" [value]="size.id">{{size.name}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Business Areas</mat-label>
+                            <mat-select [formControl]="this.selectedBusinessAreasControl" placeholder="Business Area" multiple>
+                                <mat-option *ngFor="let ba of this.businessAreas" [value]="ba.id">
+                                    {{ba.name}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </form>
+                    <ng-container *policyAuthorize="Policy.EditCompanyDetails">
+                        <button class="edit-btn" *ngIf="!this.companyEditMode" color="primary" mat-raised-button (click)="onEditCompanyInfoClick()">Edit Company Info</button>
+                    </ng-container>
+                    <div class="action-buttons" *ngIf="this.companyEditMode">
+                        <button *policyAuthorize="Policy.EditCompanyDetails" color="primary" mat-raised-button [disabled]="this.companyForm.invalid" (click)="submit()">Save</button>
+                        <button mat-raised-button color="accent" (click)="toggleCompanyEditMode()">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-scrollbar>

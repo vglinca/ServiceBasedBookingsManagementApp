@@ -1,0 +1,14 @@
+<mat-form-field style="width: 100%;" [appearance]="this.formFieldAppearance">
+    <mat-label>{{this.placeholderText}}</mat-label>
+    <input matInput
+           type="tel"
+           #phoneNumberInput="ngModel"
+           [(ngModel)]="this.rawValue"
+           [disabled]="this.disabled"
+           [required]="this.required"
+           [errorStateMatcher]="this.errorStateMatcher"
+           (blur)="this.onPhoneNumberInputBlur($event)"
+    >
+    <mat-error *ngIf="phoneNumberInput.hasError('required')">{{this.requiredText}}</mat-error>
+    <mat-error *ngIf="phoneNumberInput.hasError('pattern')">{{this.errorText}}</mat-error>
+</mat-form-field>

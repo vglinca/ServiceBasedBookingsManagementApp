@@ -1,0 +1,15 @@
+<mat-sidenav #sidenav mode="over" [style.visibility]="!isSideNavVisible ? 'visible' : 'none'">
+    <app-sidenav-list (closeSidenav)="sidenav.close()"></app-sidenav-list>
+</mat-sidenav>
+<mat-sidenav-container (click)="sidenav.close()">
+    <mat-drawer-container>
+        <mat-drawer mode="side" [opened]="isSideNavVisible">
+            <app-sidebar></app-sidebar>
+        </mat-drawer>
+        <mat-drawer-content [@fadeAnimation]="getRouterOutletState(outlet)">
+            <app-header [isMenuButtonShown]="!isSideNavVisible" (toggleSidenav)="sidenav.open()"></app-header>
+            <router-outlet #outlet="outlet"></router-outlet>
+        </mat-drawer-content>
+
+    </mat-drawer-container>
+</mat-sidenav-container>

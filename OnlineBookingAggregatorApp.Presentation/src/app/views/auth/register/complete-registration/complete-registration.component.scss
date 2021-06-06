@@ -1,0 +1,68 @@
+@mixin displayFlex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.root-email-container {
+  width: 100%;
+  height: 100%;
+  @include displayFlex();
+  flex-direction: column;
+  font-size: 1.4rem;
+
+  & .header-message {
+    font-size: 2.1rem;
+    margin: 4%;
+  }
+
+  & .message {
+    @include displayFlex();
+    margin-top: 1%;
+    padding-left: 1%;
+    padding-right: 1%;
+  }
+
+  & .sign-in-link {
+    margin-top: 1%;
+  }
+
+  & .email {
+    color: #531db8;
+  }
+}
+
+img {
+  width: 40rem;
+  height: 30rem;
+}
+
+
+@media (max-width: 1000px) {
+  img {
+    width: 30rem;
+    height: 20rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .root-email-container {
+    font-size: 1rem;
+
+    & .header-message {
+      font-size: 1.8rem;
+      margin: 4%;
+    }
+  }
+
+  .message {
+    margin-right: 1%;
+    margin-left: 1%;
+  }
+
+  img {
+    width: 20rem;
+    height: 15rem;
+  }
+}
+

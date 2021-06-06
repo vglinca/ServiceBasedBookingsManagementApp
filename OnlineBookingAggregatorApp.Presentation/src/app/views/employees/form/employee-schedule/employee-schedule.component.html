@@ -1,0 +1,55 @@
+<mat-card>
+    <mat-card-title>
+        <h2>Employee Schedule</h2>
+    </mat-card-title>
+    <mat-card-content>
+        <form [formGroup]="scheduleForm">
+            <div formArrayName="schedules">
+                <div style="display: flex; flex-direction: column;" *ngFor="let schedule of this.getSchedules(scheduleForm); let i = index">
+                    <mat-divider *ngIf="this.getSchedules(scheduleForm).length > 1 && i > 0"></mat-divider>
+                    <div class="fields-wrapper" [formGroupName]="i">
+                        <mat-form-field >
+                            <mat-label>Work starts at hour</mat-label>
+                            <mat-select formControlName="workingHoursFrom" placeholder="Work starts at hour">
+                                <mat-option *ngFor="let hour of this.hourList" [value]="hour.id">{{hour.name}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-form-field >
+                            <mat-label>Work starts at minute</mat-label>
+                            <mat-select formControlName="workingMinutesFrom" placeholder="Work starts at minute">
+                                <mat-option *ngFor="let minute of this.minutesList" [value]="minute.id">{{minute.name}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-form-field >
+                            <mat-label>Work ends at hour</mat-label>
+                            <mat-select formControlName="workingHoursTo" placeholder="Work ends at hour">
+                                <mat-option *ngFor="let hour of this.hourList" [value]="hour.id">{{hour.name}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-form-field >
+                            <mat-label>Work ends at minute</mat-label>
+                            <mat-select formControlName="workingMinutesTo" placeholder="Work ends at minute">
+                                <mat-option *ngFor="let minute of this.minutesList" [value]="minute.id">{{minute.name}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>Day</mat-label>
+                            <mat-select formControlName="daysOfWeek" placeholder="Day" multiple>
+                                <mat-option *ngFor="let day of this.weekDays" [value]="day.id">{{day.name}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <button type="button" mat-icon-button color="warn" (click)="removeInterval(i)">
+                            <mat-icon>remove</mat-icon>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div>
+            <button mat-raised-button color="primary" (click)="addInterval()">
+                <mat-icon>add</mat-icon>
+                <ng-container>Add Interval</ng-container>
+            </button>
+        </div>
+    </mat-card-content>
+</mat-card>

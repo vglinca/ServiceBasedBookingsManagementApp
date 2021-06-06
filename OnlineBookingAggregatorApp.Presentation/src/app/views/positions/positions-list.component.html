@@ -1,0 +1,22 @@
+<div class="table-content-container">
+    <div *ngIf="isLoading" class="progress-bar">
+        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </div>
+    <div>
+        <h2>Positions</h2>
+        <mat-divider></mat-divider>
+    </div>
+    <app-table-component
+            [totalItems$]="this.totalItems$"
+            [columnDefs]="this.columnDefs"
+            defaultSort="name"
+            [showDialogOnEditInsteadOfPage]="true"
+            [data$]="this.positions$"
+            [policyToAddResource]="Policy.AddPositions"
+            [policyToEditResource]="Policy.EditPositions"
+            [policyToDeleteResource]="Policy.DeletePositions"
+            (onAnyChange)="this.onChange($event)"
+            (onDelete)="deletePosition($event)"
+            (openDialogToAddOrEdit)="openEditDialog($event)"
+    ></app-table-component>
+</div>

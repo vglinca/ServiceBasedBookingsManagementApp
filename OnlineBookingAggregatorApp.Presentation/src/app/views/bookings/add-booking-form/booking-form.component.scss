@@ -1,0 +1,23 @@
+mat-card-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+:host ::ng-deep .mat-tab-labels{
+  display: flex;
+  justify-content: center;
+}
+
+:host {
+  .mark {
+    display: flex;
+    align-items: center;
+    mat-icon {
+      position: absolute;
+      bottom: -3px;
+    }
+    span {
+      margin-left: 28px;
+    }
+  }
+}

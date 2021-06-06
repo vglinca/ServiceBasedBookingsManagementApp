@@ -1,0 +1,6 @@
+<mat-form-field>
+    <mat-select [disabled]="this.hasValue() || inputDisabled" [(ngModel)]="value" [placeholder]="placeholder" multiple>
+        <mat-option *ngFor="let item of this.selectItems" [value]="this.ignoreId ? item.name : item.id" (click)="this.onItemClick()"
+        >{{item.name}}</mat-option>
+    </mat-select>
+</mat-form-field>
